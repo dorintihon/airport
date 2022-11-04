@@ -1,48 +1,77 @@
-public abstract class Aircraft {
+public abstract class Aircraft implements Flyable{
     // data members
-    private int maxSpeed;
-    private int distance;
-    private double currentSpeed;
+
+    private int speed;
     private String name;
+    private boolean isFlying;
+    private int maxSpeed;
 
-    // constructor
+    //Default constructor
     public Aircraft (){
-        this.currentSpeed=0;
-        this.maxSpeed =0;
-        this.distance = 0;
-        this.name="No Name";
+        speed = 0;
+        maxSpeed = 0;
+        name = "No Name";
+        isFlying = false;
     }
 
-    // getter and setter methods
-
-    public int getDistance() {
-        return distance;
-    }
-
-    public void setDistance(int distance) {
-        this.distance = distance;
-    }
-    public double getMaxSpeed() {
-        return maxSpeed;
-    }
-    public void setMaxSpeed(int maxSpeed) {
+    //Parameter constructor
+    public Aircraft(int maxSpeed, int speed, String name, boolean isFlying) {
         this.maxSpeed = maxSpeed;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
+        this.speed = speed;
         this.name = name;
-    }
-    public double getCurrentSpeed() {
-        return currentSpeed;
-    }
-    public void setCurrentSpeed(double currentSpeed) {
-        this.currentSpeed = currentSpeed;
+        this.isFlying = isFlying;
     }
 
+    // interface methods
+    public boolean aircraftFly() {
+        if(speed == maxSpeed){
+            isFlying = true;
+            return true;
+        }
+        return false;
+    }
 
     // abstract methods
     public abstract String takeOfType();
     public abstract String landingType();
+
+    // getter and setter methods
+
+
+    public int getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public void setMaxSpeed(int maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+
+    public boolean getIsFlying() {
+        return isFlying;
+    }
+
+    public void setIsFlying(boolean isFlying) {
+        this.isFlying = isFlying;
+    }
+
+    public String getAircraftName() {
+        return name;
+    }
+    public void setAircraftName(String planeName) {
+        this.name = planeName;
+    }
+    public int getSpeed() {
+        return speed;
+    }
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+
+    //toString
+    @Override
+    public String toString() {
+        return "Aircraft name: " + name + "\n" +
+                "Current aircraft speed: " + speed + "\n";
+    }
 }

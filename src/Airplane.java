@@ -1,53 +1,52 @@
-public class Airplane extends Aircraft implements Flyable{
-    private double takeoffDistance;
-    private double landingDistance;
+public class Airplane extends Aircraft{
+
+    private final int distance;
 
     public Airplane(){
         super();
-        this.setTakeoffDistance(0);
-        this.setLandingDistance(0);
+        distance = 0;
+    }
+
+    public Airplane(int planeMaxSpeed, int distance, int speed, String name,  boolean isFlying) {
+        super(planeMaxSpeed, speed, name, isFlying);
+
+        this.distance = distance;
     }
 
     // unimplemented methods
-    @Override
-    public boolean planeFly() {
-        return super.getCurrentSpeed()>=10;
-    }
 
     @Override
     public String takeOfType() {
-        return ("Gradual Horizontal)");
+        return "Gradual Horizontal";
     }
 
     @Override
     public String landingType() {
-        return ("Gradual Horizontal)");
+        return "Gradual Horizontal";
+    }
+
+
+    @Override
+    public boolean aircraftLand() {
+        return getIsFlying() && distance <= 11;
+
     }
 
     @Override
-    public boolean planeLand() {
-        return super.getCurrentSpeed()<10;
-    }
-
-    @Override
-    public boolean planeTakeOff() {
-        return super.getCurrentSpeed()>0;
+    public boolean aircraftTakeOff() {
+        return !getIsFlying() && distance <= 11;
     }
 
     // setter and getter methods
-    public double getTakeoffDistance() {
-        return takeoffDistance;
-    }
 
-    public void setTakeoffDistance(double takeoffDistance) {
-        this.takeoffDistance = takeoffDistance;
-    }
 
-    public double getLandingDistance() {
-        return landingDistance;
-    }
 
-    public void setLandingDistance(double landingDistance) {
-        this.landingDistance = landingDistance;
+    //toString
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "Distance required to takeoff or land: " + distance + "\n";
     }
 }
+

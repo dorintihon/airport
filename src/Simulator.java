@@ -1,90 +1,87 @@
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 
 public class Simulator {
-    public static void main(String [] args){
-        ArrayList<Aircraft> ac=new ArrayList<Aircraft>();
-        Scanner sc=new Scanner(System.in);
-        Random rand=new Random();
+    public static void main(String [] args) {
+        ArrayList<Aircraft> aircrafts = new ArrayList<>();
+        Random rand = new Random();
 
 // 5 random objects
-        for(int i=0;i<5;i++){
-            int r=rand.nextInt(3)%2;
+        for (int i = 0; i < 5; i++) {
+            int r = rand.nextInt(2);
+            int maxSpeed;
+            int distance;
+            int speed;
+            String name;
+            boolean isFlying;
 
-            if(r==0){
-                Helicopter h=new Helicopter();
-                System.out.print("Helicopter name : ");
-                String name=sc.next();
-                System.out.print("Top speed of Helicopter : ");
-                int tspeed=sc.nextInt();
-                h.setName(name);;
-                h.setMaxSpeed(tspeed);
-                h.setCurrentSpeed(1);
-                ac.add(h);
+            if (r == 0) {
+                maxSpeed = rand.nextInt(2, 3);
+                speed = rand.nextInt(1,3);
+                name = "Heli_0" + rand.nextInt(5);
+                for(Aircraft obj: aircrafts){
+                    if (name.equals(obj.getAircraftName())){
+                        name = "Heli_0" + rand.nextInt(5) + 1;
+                    }
+                }
+                isFlying = rand.nextBoolean();
+                aircrafts.add(new Helicopter(maxSpeed,speed, name, isFlying));
+
+            } else {
+                maxSpeed = rand.nextInt(2, 3);
+                distance = rand.nextInt(9,12);
+                speed = rand.nextInt(1,3);
+                name = "Plane_0" + rand.nextInt(5);
+                for(Aircraft obj: aircrafts){
+                    if (name.equals(obj.getAircraftName())){
+                        name = "Plane_0" + rand.nextInt(5) + 1;
+                    }
+                }
+                isFlying = rand.nextBoolean();
+                aircrafts.add(new Airplane(maxSpeed, distance, speed, name, isFlying));
+
             }
-            else{
-                Airplane ap=new Airplane();
-                System.out.print("AirPlane name : ");
-                String name=sc.next();
-                System.out.print("Top speed of AirPlane : ");
-                int tspeed=sc.nextInt();
-                ap.setName(name);
-                ap.setMaxSpeed(tspeed);
-                ap.setCurrentSpeed(1);
-                ac.add(ap);
-            }
+        }
+
+        //Print objects information
+        for (Aircraft aircraft : aircrafts) {
+            System.out.println(aircraft.toString());
         }
 
 // taking off
-        for(int i=0;i<5;i++){
-            Aircraft acraft=ac.get(i);
+        for (Aircraft acraft : aircrafts) {
+            if (acraft instanceof Helicopter h) {
+                if (h.aircraftFly()) {
+                    System.out.println(h.getAircraftName() + " [Helicopter] is flying ");
+                } else if (h.aircraftLand()) {
+                    System.out.println(h.getAircraftName() + " [Helicopter] is landing ");
+                } else if (h.aircraftTakeOff()) {
+                    System.out.println(h.getAircraftName() + " [Helicopter] is taking off ");
+                }
+                System.out.println("Fly: " + h.aircraftFly());
+                System.out.println("Max:" + h.getMaxSpeed());
+                System.out.println("Current:" + h.getSpeed());
 
-            if(acraft instanceof Helicopter){
-                Helicopter h=(Helicopter) acraft;
-                System.out.println(h.getName()+" [Helicopter] is taking off : "+h.planeTakeOff());
             }
-            if(acraft instanceof Airplane){
-                Airplane h=(Airplane) acraft;
-                System.out.println(h.getName()+" [Airplane] is taking off : "+h.planeTakeOff());
-            }
-        }
+            if (acraft instanceof Airplane a) {
+                if (a.aircraftFly()) {
+                    System.out.println(a.getAircraftName() + " [Airplane] is flying ");
+                } else if (a.aircraftLand()) {
+                    System.out.println(a.getAircraftName() + " [Airplane] is landing ");
+                } else if (a.aircraftTakeOff()) {
+                    System.out.println(a.getAircraftName() + " [Airplane] is taking off ");
+                }
+                System.out.println("Fly: " + a.aircraftFly());
+                System.out.println("Max:" + a.getMaxSpeed());
+                System.out.println("Current:" + a.getSpeed());
 
-        System.out.println();
-        System.out.println();
-// flying objects
-        for(int i=0;i<5;i++){
-            ac.get(i).setCurrentSpeed(rand.nextInt((int) ac.get(i).getMaxSpeed()));
-            Aircraft acraft=ac.get(i);
-
-            if(acraft instanceof Helicopter){
-                Helicopter h=(Helicopter) acraft;
-                System.out.println(h.getName()+" [Helicopter] is flying : "+h.planeFly()+" [Current Speed is "+h.getCurrentSpeed()+" ]");
-            }
-            if(acraft instanceof Airplane){
-                Airplane h=(Airplane) acraft;
-                System.out.println(h.getName()+" [Airplane] is flying : "+h.planeFly()+" [Current Speed is "+h.getCurrentSpeed()+" ]");
-            }
-        }
-
-
-        System.out.println();
-        System.out.println();
-
-// landing or not
-        for(int i=0;i<5;i++){
-            ac.get(i).setCurrentSpeed(rand.nextInt((int) (ac.get(i).getMaxSpeed()/150.0)));
-            Aircraft acraft=ac.get(i);
-
-            if(acraft instanceof Helicopter){
-                Helicopter h=(Helicopter) acraft;
-                System.out.println(h.getName()+" [Helicopter] is Landing : "+h.planeLand()+" [Current Speed is "+h.getCurrentSpeed()+" ]");
-            }
-            if(acraft instanceof Airplane){
-                Airplane h=(Airplane) acraft;
-                System.out.println(h.getName()+" [Airplane] is Landing : "+h.planeLand()+" [Current Speed is "+h.getCurrentSpeed()+" ]");
             }
         }
+
+        System.out.println();
+        System.out.println();
+
     }
-}
+    }
+

@@ -1,6 +1,8 @@
 public interface Flyable {
-    public boolean planeFly();
-    public boolean planeTakeOff();
-    public boolean planeLand();
+
+
+    public boolean aircraftFly();
+    public boolean aircraftTakeOff();
+    public boolean aircraftLand();
 
 }
