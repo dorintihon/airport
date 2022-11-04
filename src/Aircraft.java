@@ -1,22 +1,32 @@
 public abstract class Aircraft {
     // data members
-    private double topSpeed;
+    private int maxSpeed;
+    private int distance;
     private double currentSpeed;
     private String name;
 
     // constructor
     public Aircraft (){
         this.currentSpeed=0;
-        this.topSpeed=0;
-        this.name="";
+        this.maxSpeed =0;
+        this.distance = 0;
+        this.name="No Name";
     }
 
     // getter and setter methods
-    public double getTopSpeed() {
-        return topSpeed;
+
+    public int getDistance() {
+        return distance;
     }
-    public void setTopSpeed(double topSpeed) {
-        this.topSpeed = topSpeed;
+
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
+    public double getMaxSpeed() {
+        return maxSpeed;
+    }
+    public void setMaxSpeed(int maxSpeed) {
+        this.maxSpeed = maxSpeed;
     }
     public String getName() {
         return name;

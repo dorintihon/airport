@@ -6,7 +6,7 @@ public class Helicopter extends Aircraft implements Flyable {
 
     // unimplemented methods
     @Override
-    public boolean isFlying() {
+    public boolean planeFly() {
         return super.getCurrentSpeed()>=5;
     }
 
@@ -21,12 +21,12 @@ public class Helicopter extends Aircraft implements Flyable {
     }
 
     @Override
-    public boolean isLanding() {
+    public boolean planeLand() {
         return super.getCurrentSpeed()<5;
     }
 
     @Override
-    public boolean isTakingOff() {
+    public boolean planeTakeOff() {
         return super.getCurrentSpeed()>0;
     }
 

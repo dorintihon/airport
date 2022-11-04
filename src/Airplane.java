@@ -10,7 +10,7 @@ public class Airplane extends Aircraft implements Flyable{
 
     // unimplemented methods
     @Override
-    public boolean isFlying() {
+    public boolean planeFly() {
         return super.getCurrentSpeed()>=10;
     }
 
@@ -25,12 +25,12 @@ public class Airplane extends Aircraft implements Flyable{
     }
 
     @Override
-    public boolean isLanding() {
+    public boolean planeLand() {
         return super.getCurrentSpeed()<10;
     }
 
     @Override
-    public boolean isTakingOff() {
+    public boolean planeTakeOff() {
         return super.getCurrentSpeed()>0;
     }
 

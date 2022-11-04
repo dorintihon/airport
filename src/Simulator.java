@@ -18,9 +18,9 @@ public class Simulator {
                 System.out.print("Helicopter name : ");
                 String name=sc.next();
                 System.out.print("Top speed of Helicopter : ");
-                double tspeed=sc.nextDouble();
+                int tspeed=sc.nextInt();
                 h.setName(name);;
-                h.setTopSpeed(tspeed);
+                h.setMaxSpeed(tspeed);
                 h.setCurrentSpeed(1);
                 ac.add(h);
             }
@@ -29,9 +29,9 @@ public class Simulator {
                 System.out.print("AirPlane name : ");
                 String name=sc.next();
                 System.out.print("Top speed of AirPlane : ");
-                double tspeed=sc.nextDouble();
+                int tspeed=sc.nextInt();
                 ap.setName(name);
-                ap.setTopSpeed(tspeed);
+                ap.setMaxSpeed(tspeed);
                 ap.setCurrentSpeed(1);
                 ac.add(ap);
             }
@@ -43,11 +43,11 @@ public class Simulator {
 
             if(acraft instanceof Helicopter){
                 Helicopter h=(Helicopter) acraft;
-                System.out.println(h.getName()+" [Helicopter] is taking off : "+h.isTakingOff());
+                System.out.println(h.getName()+" [Helicopter] is taking off : "+h.planeTakeOff());
             }
             if(acraft instanceof Airplane){
                 Airplane h=(Airplane) acraft;
-                System.out.println(h.getName()+" [Airplane] is taking off : "+h.isTakingOff());
+                System.out.println(h.getName()+" [Airplane] is taking off : "+h.planeTakeOff());
             }
         }
 
@@ -55,16 +55,16 @@ public class Simulator {
         System.out.println();
 // flying objects
         for(int i=0;i<5;i++){
-            ac.get(i).setCurrentSpeed(rand.nextInt((int) ac.get(i).getTopSpeed()));
+            ac.get(i).setCurrentSpeed(rand.nextInt((int) ac.get(i).getMaxSpeed()));
             Aircraft acraft=ac.get(i);
 
             if(acraft instanceof Helicopter){
                 Helicopter h=(Helicopter) acraft;
-                System.out.println(h.getName()+" [Helicopter] is flying : "+h.isFlying()+" [Current Speed is "+h.getCurrentSpeed()+" ]");
+                System.out.println(h.getName()+" [Helicopter] is flying : "+h.planeFly()+" [Current Speed is "+h.getCurrentSpeed()+" ]");
             }
             if(acraft instanceof Airplane){
                 Airplane h=(Airplane) acraft;
-                System.out.println(h.getName()+" [Airplane] is flying : "+h.isFlying()+" [Current Speed is "+h.getCurrentSpeed()+" ]");
+                System.out.println(h.getName()+" [Airplane] is flying : "+h.planeFly()+" [Current Speed is "+h.getCurrentSpeed()+" ]");
             }
         }
 
@@ -74,16 +74,16 @@ public class Simulator {
 
 // landing or not
         for(int i=0;i<5;i++){
-            ac.get(i).setCurrentSpeed(rand.nextInt((int) (ac.get(i).getTopSpeed()/150.0)));
+            ac.get(i).setCurrentSpeed(rand.nextInt((int) (ac.get(i).getMaxSpeed()/150.0)));
             Aircraft acraft=ac.get(i);
 
             if(acraft instanceof Helicopter){
                 Helicopter h=(Helicopter) acraft;
-                System.out.println(h.getName()+" [Helicopter] is Landing : "+h.isLanding()+" [Current Speed is "+h.getCurrentSpeed()+" ]");
+                System.out.println(h.getName()+" [Helicopter] is Landing : "+h.planeLand()+" [Current Speed is "+h.getCurrentSpeed()+" ]");
             }
             if(acraft instanceof Airplane){
                 Airplane h=(Airplane) acraft;
-                System.out.println(h.getName()+" [Airplane] is Landing : "+h.isLanding()+" [Current Speed is "+h.getCurrentSpeed()+" ]");
+                System.out.println(h.getName()+" [Airplane] is Landing : "+h.planeLand()+" [Current Speed is "+h.getCurrentSpeed()+" ]");
             }
         }
     }
